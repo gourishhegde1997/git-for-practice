@@ -1,6 +1,7 @@
 package javaJDBCexamples.CRUD;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class Connect {
 	
@@ -15,7 +16,7 @@ public class Connect {
 			this.userName = userName;
 			this.password = password;
 			this.schema = schema;
-			String url = "jdbc:mysql://localhost/"+schema;
+			String url = "jdbc:mysql://localhost/"+schema+"?serverTimezone=UTC";
 //			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(url, userName, password);
 			System.out.println("---> Database connection is established...!");

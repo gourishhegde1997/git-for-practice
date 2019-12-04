@@ -11,11 +11,16 @@ public class Create {
 
 	Statement stmt = null;
 	ResultSet rs = null;
-	static Connection conn = null;
+	Connection conn = null;
+	String tableName = "";
 	static List<String> arguments = new ArrayList<>();
 
 	public void create_table(Connection conn, String tableName, List<String> cols) {
 		try {
+			this.conn = conn;
+			this.tableName = tableName;
+			
+			System.out.println("---> Executing CREATE opertion for table name : "+tableName);
 			String args = "";
 			for(String ele : cols){
 //				System.out.println(ele);
@@ -23,8 +28,7 @@ public class Create {
 			}		
 			System.out.println(args);
 			String finalArgs = args.substring(0,args.lastIndexOf(","));
-			System.out.println("---> "+finalArgs);
-			Create.conn = conn;
+//			System.out.println("---> "+finalArgs);
 			stmt = conn.createStatement();
 			String query = "create table "+ tableName +"("+finalArgs+");";
 			System.out.println("---> Query to be executed is:");
@@ -44,12 +48,13 @@ public class Create {
 
 	public static void main(String[] args) {
 		Connect cnt = new Connect();
-		conn = cnt.init("root", "root", "Student_details");
 		Create ct = new Create();
+		
+		Connection conn = cnt.init("root", "root", "Student_details");
 		arguments.add("student_id varchar(3) primary key");
 		arguments.add("student_name varchar(15) not null");
 		arguments.add("combination char(4)");
-		arguments.add("contact_no integer(10)");
+		arguments.add("contact_no bigint(10)");
 		ct.create_table(conn, "Student_table",arguments);
 		
 	}
