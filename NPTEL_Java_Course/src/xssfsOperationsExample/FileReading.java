@@ -37,6 +37,7 @@ public class FileReading {
 				}
 			}
 		}
+		xsfb.close();
 	}
 
 }
