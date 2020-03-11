@@ -17,6 +17,7 @@ public class Connect {
 			this.password = password;
 			this.schema = schema;
 			String url = "jdbc:mysql://localhost/"+schema+"?serverTimezone=UTC";
+			System.out.println(url);
 //			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(url, userName, password);
 			System.out.println("---> Database connection is established...!");
@@ -32,7 +33,7 @@ public class Connect {
 	public static void main(String[] args) {
 		System.out.println("---> Welcome to the JDBC example program...");
 		Connect cnt = new Connect();
-		cnt.init("root","root","Student_details");
+		cnt.init("root","root","test");
 	}
 
 }
